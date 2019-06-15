@@ -43,10 +43,10 @@ docker node inspect --format '{{.Status.Addr}}' swarm
 192.168.122.175
 ```
 ## Portainer 
+After deploying the agent stack check to make sure the services are being replicated across your swarm.
 
 ```
 docker stack deploy --compose-file=portainer-agent-stack.yml portainer
-docker service ls
 docker service ls
 ID                  NAME                  MODE                REPLICAS            IMAGE                        PORTS
 r56tvhvahdqv        portainer_agent       global              3/3                 portainer/agent:latest       
@@ -62,9 +62,8 @@ ID                  NAME                                        IMAGE           
 1cpxc6kqg956        portainer_agent.m7tm3y98ytoyt0llq67qtvwuo   portainer/agent:latest   swarm               Running             Running 2 hours ago                       
 20qmlfbfzl33        portainer_agent.qgngrj1wdxru4xdlpj4zsvwmx   portainer/agent:latest   swarm1              Running             Running 2 hours ago                       
 ```
-## Tick Stack
-This next part I got the conf and compose files from [https://github.com/mlabouardy/swarm-tick](https://github.com/mlabouardy/swarm-tick)
-I also created 1 more manager and 1 more agent for fault [tolerance](https://docs.docker.com/engine/swarm/admin_guide/)
+## Quorum
+To make this cluster more fault [tolerant](https://docs.docker.com/engine/swarm/admin_guide/) lets add another manager and another agent to the cluster.
 ```
 docker node ls
 ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS      ENGINE VERSION
@@ -75,4 +74,7 @@ m7tm3y98ytoyt0llq67qtvwuo     swarm2              Ready               Active    
 if3cady0iv0mxdwk1b7vtqvxz     swarm3              Ready               Active                                  18.09.6
 ```
 ![Portainer Swarm Fault tolerance](./assets/images/portainerui.png)
+
+## Tick Stack
+This next part I got the conf and compose files from [https://github.com/mlabouardy/swarm-tick](https://github.com/mlabouardy/swarm-tick)
 
