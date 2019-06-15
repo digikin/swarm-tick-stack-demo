@@ -121,6 +121,8 @@ tick                4                   Swarm
 
 ## Chronograf
 Since there was a node constraint "manager" in place you can reach your chronograf UI at http:localhost:8888
+Docker will help us out with DNS so change the Connection to `http://influxdb:8086`
+
 ![Chronograph UI](./assets/images/Screenshot-chronograf.png)
 
 
