@@ -90,7 +90,7 @@ Creating service tick_influxdb
 Creating service tick_chronograf
 Creating service tick_kapacitor
 ```
-### If you want to monitor during the deploy process run the command `docker service ls` a few times to watch the containers get built.
+Monitor during the build by running the command `docker service ls` a few times to watch the containers get built.
 ```
 docker service ls
 ID                  NAME                  MODE                REPLICAS            IMAGE                        PORTS
