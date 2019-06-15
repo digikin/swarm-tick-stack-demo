@@ -79,6 +79,17 @@ if3cady0iv0mxdwk1b7vtqvxz     swarm3              Ready               Active    
 
 ## Tick Stack
 This next part I got the conf and compose files from [https://github.com/mlabouardy/swarm-tick](https://github.com/mlabouardy/swarm-tick)
-
+The docker-compose.yml file contains all the images to deploy a complete TICK stack.  For fun we are going to create a simple dashboard to monitor the clusters data. 
+Here we are going to deploy this as a [stack](https://docs.docker.com/engine/reference/commandline/stack/).
+```
+docker stack deploy -c docker-compose.yml tick
+Creating config tick_telegraf-config
+Creating config tick_kapacitor-config
+Creating service tick_telegraf
+Creating service tick_influxdb
+Creating service tick_chronograf
+Creating service tick_kapacitor
+```
+If you want during the deploy process run the command `docker service ls` a few times to watch the container get built.
 
 
