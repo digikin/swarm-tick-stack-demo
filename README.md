@@ -43,6 +43,8 @@ docker node inspect --format '{{.Status.Addr}}' swarm
 192.168.122.175
 ```
 ## Portainer 
+We are going install [Portainer](https://www.portainer.io/installation/) to get a visual representation with whats going on within the swarm.  
+I linked the website because there is way more thing you can do with portainer but for this demo its just eye candy to see inside the cluster.
 After deploying the agent stack check to make sure the services are being replicated across your swarm.
 
 ```
@@ -77,4 +79,6 @@ if3cady0iv0mxdwk1b7vtqvxz     swarm3              Ready               Active    
 
 ## Tick Stack
 This next part I got the conf and compose files from [https://github.com/mlabouardy/swarm-tick](https://github.com/mlabouardy/swarm-tick)
+
+
 
