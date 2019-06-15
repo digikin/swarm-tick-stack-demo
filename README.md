@@ -118,3 +118,9 @@ portainer           2                   Swarm
 tick                4                   Swarm
 ```
 ![Portainer Stack](./assets/images/Screenshot-stack.png)
+
+## Chronograf
+Since there was a node constraint "manager" in place you can reach your chronograf UI at http:localhost:8888
+![Chronograph UI](./assets/images/Screenshot-chronograf.png)
+
+
