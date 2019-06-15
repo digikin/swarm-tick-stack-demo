@@ -1,5 +1,5 @@
 # ghost-stack
-docker swarm stack deploy ghost blog
+docker swarm stack deploy demo
 
 ```
 docker swarm init --advertise-addr <local ip>
