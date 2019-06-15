@@ -1,0 +1,17 @@
+version: "3.3"
+
+services:
+  telegraf:
+    image: telegraf:1.4.0
+    hostname: "{{.Node.ID}}"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    configs:
+      - source: telegraf.conf
+        target: /etc/telegraf/telegraf.conf
+    deploy:
+      mode: global
+
+configs:
+  telegraf.conf:
+    file: ./telegraf/telegraf.conf
