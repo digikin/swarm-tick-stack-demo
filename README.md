@@ -1,4 +1,4 @@
-# ghost-stack
+# swarm-stack
 docker swarm stack deploy demo
 
 ```
