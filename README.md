@@ -1,4 +1,4 @@
-# swarm-stack
+# Swarm-stack
 docker swarm stack deploy demo
 
 ## Start the cluster by declairing the masters IP address
@@ -6,7 +6,7 @@ docker swarm stack deploy demo
 docker swarm init --advertise-addr <local ip>
 ```
 ## Use KVM or Hyper-v to create two virtual machines 
-I use Ubuntu Server [Ubuntu Server 18.04.2 LTS](https://ubuntu.com/download/server). When you name your serve keep to the naming convention like "swarm" and "swarm1".
+I use Ubuntu Server [Ubuntu Server 18.04.2 LTS](https://ubuntu.com/download/server). When you name your server keep to the naming convention like "swarm" and "swarm1".
 Install docker on both of the virtual machines. I use the get-docker script for simplicity.
 
 ```
