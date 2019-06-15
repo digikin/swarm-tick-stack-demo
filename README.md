@@ -18,7 +18,5 @@ ID                            HOSTNAME            STATUS              AVAILABILI
 23dfq1l3i3ku2vw3huu07y3u9 *   alienware           Ready               Active              Leader              0.0.0-20190612010257-8feff36
 x4t00cdi7lbepnllvp88lplyj     swarm               Ready               Active                                  18.09.6
 qgngrj1wdxru4xdlpj4zsvwmx     swarm1              Ready               Active                                  18.09.6
-m7tm3y98ytoyt0llq67qtvwuo     swarm2              Ready               Active              Reachable           18.09.6
-if3cady0iv0mxdwk1b7vtqvxz     swarm3              Ready               Active                                  18.09.6
 ```
 
