@@ -90,6 +90,31 @@ Creating service tick_influxdb
 Creating service tick_chronograf
 Creating service tick_kapacitor
 ```
-If you want during the deploy process run the command `docker service ls` a few times to watch the container get built.
+### If you want to monitor during the deploy process run the command `docker service ls` a few times to watch the containers get built.
+```
+docker service ls
+ID                  NAME                  MODE                REPLICAS            IMAGE                        PORTS
+r56tvhvahdqv        portainer_agent       global              5/5                 portainer/agent:latest       
+nf0u42mf87sw        portainer_portainer   replicated          1/1                 portainer/portainer:latest   *:9000->9000/tcp
+sc7wxgolpts1        tick_chronograf       replicated          0/1                 chronograf:1.3               *:8888->8888/tcp
+quke5z87of75        tick_influxdb         replicated          0/1                 influxdb:1.2                 
+tnrhbxfpol4g        tick_kapacitor        replicated          0/1                 kapacitor:1.2                
+ly15zgemv8nn        tick_telegraf         global              0/5                 telegraf:1.3  
 
-
+docker service ls
+ID                  NAME                  MODE                REPLICAS            IMAGE                        PORTS
+r56tvhvahdqv        portainer_agent       global              5/5                 portainer/agent:latest       
+nf0u42mf87sw        portainer_portainer   replicated          1/1                 portainer/portainer:latest   *:9000->9000/tcp
+sc7wxgolpts1        tick_chronograf       replicated          1/1                 chronograf:1.3               *:8888->8888/tcp
+quke5z87of75        tick_influxdb         replicated          0/1                 influxdb:1.2                 
+tnrhbxfpol4g        tick_kapacitor        replicated          0/1                 kapacitor:1.2                
+ly15zgemv8nn        tick_telegraf         global              3/5                 telegraf:1.3         
+```
+Lets check two different ways if we have services running in both stacks with the command line then portainer.
+```
+docker stack ls
+NAME                SERVICES            ORCHESTRATOR
+portainer           2                   Swarm
+tick                4                   Swarm
+```
+![Portainer Stack](./assets/images/Screenshot-stack.png)
