@@ -78,7 +78,7 @@ if3cady0iv0mxdwk1b7vtqvxz     swarm3              Ready               Active    
 ![Portainer Swarm Fault tolerance](./assets/images/portainerui.png)
 
 ## Tick Stack
-This next part I got the conf and compose files from [https://github.com/mlabouardy/swarm-tick](https://github.com/mlabouardy/swarm-tick)
+This next part I got the conf and compose files from a few different repos.
 The docker-compose.yml file contains all the images to deploy a complete TICK stack.  For fun we are going to create a simple dashboard to monitor the clusters data. 
 Here we are going to deploy this as a [stack](https://docs.docker.com/engine/reference/commandline/stack/).
 ```
