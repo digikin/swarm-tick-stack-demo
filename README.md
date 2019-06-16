@@ -65,7 +65,7 @@ ID                  NAME                                        IMAGE           
 20qmlfbfzl33        portainer_agent.qgngrj1wdxru4xdlpj4zsvwmx   portainer/agent:latest   swarm1              Running             Running 2 hours ago                       
 ```
 ## Quorum
-To make this cluster more fault [tolerant](https://docs.docker.com/engine/swarm/admin_guide/) lets add another manager and another worker to the cluster. 
+To make this cluster slightly more fault [tolerant](https://docs.docker.com/engine/swarm/admin_guide/) lets add another manager and another worker to the cluster. To achieve quorum its best to have odd number of managers.
 You can bring up your original join token with:
 ```bash
 $ docker swarm join-token manager
