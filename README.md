@@ -176,6 +176,8 @@ a5sbo2wt09zo        tick_influxdb         replicated          2/2               
 objfdomzbjly        tick_kapacitor        replicated          2/2                 kapacitor:latest             *:9092->9092/tcp
 cw9gzbaql6zh        tick_telegraf         global              5/5                 telegraf:1.9.5-alpine        
 ```
+
+You can see the graphs on the dashboard shoot up during the build process.
 ![Dashboard](./assets/images/Screenshot-dashboard.png)
 
 # Clean up
