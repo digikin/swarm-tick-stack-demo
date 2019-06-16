@@ -66,7 +66,6 @@ ID                  NAME                                        IMAGE           
 ```
 ## Quorum
 To make this cluster more fault [tolerant](https://docs.docker.com/engine/swarm/admin_guide/) lets add two more managers to the cluster. To achieve quorum its best to have an odd number of managers.
-You can bring up your original join token with:
 If you run `docker info` with an even number of managers you will get a warning.
 ```s
 WARNING: Running Swarm in a two-manager configuration. This configuration provides
@@ -74,6 +73,7 @@ WARNING: Running Swarm in a two-manager configuration. This configuration provid
          Refer to https://docs.docker.com/engine/swarm/admin_guide/ to configure the
          Swarm for fault-tolerance.
 ```
+You can bring up your original join token with:
 ```s
 $ docker swarm join-token manager
 // or use the same command for a worker token
