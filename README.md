@@ -3,14 +3,14 @@ docker swarm tick stack deploy demo.
 Clone the repo https://github.com/digikin/swarm-tick-stack-demo.git.
 
 ## Start the cluster by declairing the masters IP address
-```bash
+```s
 $ docker swarm init --advertise-addr <local ip>
 ```
 ## Use KVM or Hyper-v to create two virtual machines 
 I use [Ubuntu Server 18.04.2 LTS](https://ubuntu.com/download/server) for VM's inside of a swarm. When you build your server keep to the naming convention like "swarm" and "swarm1".
 Install docker on both of the virtual machines. I use the get-docker script for simplicity.
 
-```
+```s
 $ ssh <user>@<VM-Machine1>
 $ sudo passwd <create a root password>
 $ sudo apt update && sudo apt upgrade -y
@@ -29,7 +29,7 @@ $docker swarm join --token XXXXXX-X-XXXXXXXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXX
 ```
 ## Repeat this process for another VM so you have 1 manager and 2 worker
 
-```bash
+```s
 $ docker node ls
 ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS      ENGINE VERSION
 23dfq1l3i3ku2vw3huu07y3u9 *   alienware           Ready               Active              Leader              0.0.0-20190612010257-8feff36
@@ -39,7 +39,7 @@ qgngrj1wdxru4xdlpj4zsvwmx     swarm1              Ready               Active    
 ## Inspect your nodes
 You can use the inspect command two different ways.  The most common method is to just add --pretty to get a human readable output.  
 The other way is to --format the output and filter any field within the JSON output.
-```bash
+```s
 $ docker node inspect --format '{{.Status.Addr}}' swarm
 192.168.122.175
 ```
@@ -48,7 +48,7 @@ We are going install [Portainer](https://www.portainer.io/installation/) to get 
 I linked the website because there is way more that you can do with portainer but for this demo its just eye candy to see inside the cluster.
 After deploying the agent stack check to make sure the services are being replicated across your swarm.
 
-```bash
+```bs
 $ docker stack deploy --compose-file=portainer-agent-stack.yml portainer
 $ docker service ls
 ID                  NAME                  MODE                REPLICAS            IMAGE                        PORTS
@@ -58,7 +58,7 @@ nf0u42mf87sw        portainer_portainer   replicated          1/1               
 ## Portainer UI
 You should be able to access your portainer UI now on one of your agents IP:9000
 
-```bash
+```s
 $ docker service ps portainer_agent
 ID                  NAME                                        IMAGE                    NODE                DESIRED STATE       CURRENT STATE         ERROR               PORTS
 1cpxc6kqg956        portainer_agent.m7tm3y98ytoyt0llq67qtvwuo   portainer/agent:latest   swarm               Running             Running 2 hours ago                       
@@ -67,12 +67,19 @@ ID                  NAME                                        IMAGE           
 ## Quorum
 To make this cluster slightly more fault [tolerant](https://docs.docker.com/engine/swarm/admin_guide/) lets add another manager and another worker to the cluster. To achieve quorum its best to have an odd number of managers.
 You can bring up your original join token with:
-```bash
+If you run `docker info` with an even number of managers you will get a warning.
+```s
+WARNING: Running Swarm in a two-manager configuration. This configuration provides
+         no fault tolerance, and poses a high risk to lose control over the cluster.
+         Refer to https://docs.docker.com/engine/swarm/admin_guide/ to configure the
+         Swarm for fault-tolerance.
+```
+```s
 $ docker swarm join-token manager
 // or use the same command for a worker token
 $ docker swarm join-token worker
 ```
-```bash
+```s
 $ docker node ls
 ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS      ENGINE VERSION
 23dfq1l3i3ku2vw3huu07y3u9 *   alienware           Ready               Active              Leader              0.0.0-20190612010257-8feff36
@@ -87,7 +94,7 @@ if3cady0iv0mxdwk1b7vtqvxz     swarm3              Ready               Active    
 This next part I got the conf and compose files from a few different repos.
 The docker-compose.yml file contains all the images to deploy a complete TICK stack.  For fun we are going to create a simple dashboard to monitor the clusters data. 
 Here we are going to deploy this as a [stack](https://docs.docker.com/engine/reference/commandline/stack/).
-```bash
+```s
 $ docker stack deploy -c docker-compose.yml tick
 Creating config tick_telegraf-config
 Creating config tick_kapacitor-config
@@ -97,7 +104,7 @@ Creating service tick_chronograf
 Creating service tick_kapacitor
 ```
 Monitor during the build by running the command `docker service ls` a few times to watch the containers get built.
-```bash
+```s
 $ docker service ls
 ID                  NAME                  MODE                REPLICAS            IMAGE                        PORTS
 r56tvhvahdqv        portainer_agent       global              5/5                 portainer/agent:latest       
@@ -117,7 +124,7 @@ tnrhbxfpol4g        tick_kapacitor        replicated          0/1               
 ly15zgemv8nn        tick_telegraf         global              3/5                 telegraf:1.3         
 ```
 Lets check two different ways if we have services running in both stacks with the command line then portainer.
-```bash
+```s
 $ docker stack ls
 NAME                SERVICES            ORCHESTRATOR
 portainer           2                   Swarm
@@ -142,7 +149,7 @@ I will add more to this section later on with how to properly configure your das
 
 ## Scale
 Lets have some fun now that we have a dashboard to look at. Increase the number containers for influx, chronograf and kapacitor to 2.
-```bash
+```s
 $ docker service ls
 ID                  NAME                  MODE                REPLICAS            IMAGE                        PORTS
 r56tvhvahdqv        portainer_agent       global              5/5                 portainer/agent:latest       
@@ -181,7 +188,7 @@ You can see the graphs on the dashboard shoot up during the build process.
 ![Dashboard](./assets/images/Screenshot-dashboard.png)
 
 # Clean up
-```bash
+```s
 $ docker stack rm tick
 Removing service tick_chronograf
 Removing service tick_influxdb
