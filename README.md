@@ -120,7 +120,7 @@ tick                4                   Swarm
 ![Portainer Stack](./assets/images/Screenshot-stack.png)
 
 ## Chronograf
-Since there was a node constraint "manager" in place you can reach your chronograf UI at http://<any swarm node>:8888
+`http://<any swarm node>:8888` will bring up the chronograf login screen.
 
 Docker will help us out with DNS so change the Connection URL to `http://influxdb:8086`
 
