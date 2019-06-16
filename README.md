@@ -22,7 +22,8 @@ $ su -
 # systemctl restart docker
 # su - <user>
 $ docker info  <you should get all the docker information back without a permission error>
-
+// If you get to this point without issues you can cheat by cloning this machine before
+// joining it to the swarm
 //Issue docker swarm join with your generated token
 
 $docker swarm join --token XXXXXX-X-XXXXXXXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXX 192.168.1.8:2377
@@ -143,7 +144,7 @@ tick                4                   Swarm
 
 Docker will help us out with DNS so change the Connection URL to `http://influxdb:8086`
 
-I did have an issue with new new version of InfluxDB where I had to use my master nodes IP to connect to influx through chronograf's dashboard.
+I did have an issue with a newer version of InfluxDB where I had to use my master nodes IP to connect to influx through chronograf's dashboard.
 
 ![Chronograph UI](./assets/images/Screenshot-chronograf.png)
 ![Chronograph UI](./assets/images/Screenshot-chronograf2.png)
