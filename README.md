@@ -7,7 +7,7 @@ Clone the repo https://github.com/digikin/swarm-tick-stack-demo.git.
 $ docker swarm init --advertise-addr <local ip>
 ```
 ## Use KVM or Hyper-v to create two virtual machines 
-I use Ubuntu Server [Ubuntu Server 18.04.2 LTS](https://ubuntu.com/download/server). When you build your server keep to the naming convention like "swarm" and "swarm1".
+I use [Ubuntu Server 18.04.2 LTS](https://ubuntu.com/download/server) for VM's inside of a swarm. When you build your server keep to the naming convention like "swarm" and "swarm1".
 Install docker on both of the virtual machines. I use the get-docker script for simplicity.
 
 ```
@@ -27,7 +27,7 @@ $ docker info  <you should get all the docker information back without a permiss
 
 $docker swarm join --token XXXXXX-X-XXXXXXXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXX 192.168.1.8:2377
 ```
-## Repeat this process for another VM so you have 1 manager and 2 agents
+## Repeat this process for another VM so you have 1 manager and 2 worker
 
 ```bash
 $ docker node ls
@@ -65,7 +65,13 @@ ID                  NAME                                        IMAGE           
 20qmlfbfzl33        portainer_agent.qgngrj1wdxru4xdlpj4zsvwmx   portainer/agent:latest   swarm1              Running             Running 2 hours ago                       
 ```
 ## Quorum
-To make this cluster more fault [tolerant](https://docs.docker.com/engine/swarm/admin_guide/) lets add another manager and another agent to the cluster.
+To make this cluster more fault [tolerant](https://docs.docker.com/engine/swarm/admin_guide/) lets add another manager and another worker to the cluster. 
+You can bring up your original join token with:
+```bash
+$ docker swarm join-token manager
+// or use the same command for a worker token
+$ docker swarm join-token worker
+```
 ```bash
 $ docker node ls
 ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS      ENGINE VERSION
