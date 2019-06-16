@@ -26,7 +26,7 @@ $ docker info  <you should get all the docker information back without a permiss
 
 $docker swarm join --token XXXXXX-X-XXXXXXXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXX 192.168.1.8:2377
 ```
-## Repeat this process for another VM so you have 1 manager and 2 agents
+## Repeat this process for another VM so you have 1 manager and 2 worker
 
 ```bash
 $ docker node ls
@@ -64,7 +64,13 @@ ID                  NAME                                        IMAGE           
 20qmlfbfzl33        portainer_agent.qgngrj1wdxru4xdlpj4zsvwmx   portainer/agent:latest   swarm1              Running             Running 2 hours ago                       
 ```
 ## Quorum
-To make this cluster more fault [tolerant](https://docs.docker.com/engine/swarm/admin_guide/) lets add another manager and another agent to the cluster.
+To make this cluster more fault [tolerant](https://docs.docker.com/engine/swarm/admin_guide/) lets add another manager and another worker to the cluster. 
+You can bring up your original join token with:
+```bash
+$ docker swarm join-token manager
+// or use the same command for a worker token
+$ docker swarm join-token worker
+```
 ```bash
 $ docker node ls
 ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS      ENGINE VERSION
