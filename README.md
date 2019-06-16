@@ -44,7 +44,7 @@ docker node inspect --format '{{.Status.Addr}}' swarm
 ```
 ## Portainer 
 We are going install [Portainer](https://www.portainer.io/installation/) to get a visual representation with whats going on within the swarm.  
-I linked the website because there is way more thing you can do with portainer but for this demo its just eye candy to see inside the cluster.
+I linked the website because there is way more that you can do with portainer but for this demo its just eye candy to see inside the cluster.
 After deploying the agent stack check to make sure the services are being replicated across your swarm.
 
 ```
@@ -130,6 +130,8 @@ I did have an issue with new new version of InfluxDB where I had to use my maste
 ![Chronograph UI](./assets/images/Screenshot-chronograf2.png)
 
 ## Dashboard
+I will add more to this section later on with how to properly configure your dashboard with alerts.
+
 
 
 ## Scale
