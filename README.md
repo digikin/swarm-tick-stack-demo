@@ -120,9 +120,123 @@ tick                4                   Swarm
 ![Portainer Stack](./assets/images/Screenshot-stack.png)
 
 ## Chronograf
-Since there was a node constraint "manager" in place you can reach your chronograf UI at http://localhost:8888
-Docker will help us out with DNS so change the Connection to `http://influxdb:8086`
+Since there was a node constraint "manager" in place you can reach your chronograf UI at http://<any swarm node>:8888
+
+Docker will help us out with DNS so change the Connection URL to `http://influxdb:8086`
+
+I did have an issue with new new version of InfluxDB where I had to use my master nodes IP to connect to influx through chronograf's dashboard.
 
 ![Chronograph UI](./assets/images/Screenshot-chronograf.png)
+![Chronograph UI](./assets/images/Screenshot-chronograf2.png)
+
+## Dashboard
 
 
+## Scale
+Lets have some fun now that we have a dashboard to look at. Increase the number containers for influx, chronograf and kapacitor to 2.
+```
+docker service ls
+ID                  NAME                  MODE                REPLICAS            IMAGE                        PORTS
+r56tvhvahdqv        portainer_agent       global              5/5                 portainer/agent:latest       
+nf0u42mf87sw        portainer_portainer   replicated          1/1                 portainer/portainer:latest   *:9000->9000/tcp
+hvt62c044kp9        tick_chronograf       replicated          1/1                 chronograf:latest            *:8888->8888/tcp
+a5sbo2wt09zo        tick_influxdb         replicated          1/1                 influxdb:latest              *:8086->8086/tcp
+objfdomzbjly        tick_kapacitor        replicated          1/1                 kapacitor:latest             *:9092->9092/tcp
+cw9gzbaql6zh        tick_telegraf         global              5/5                 telegraf:1.9.5-alpine        
+docker service scale tick_kapacitor=2 tick_influxdb=2 tick_chronograf=2
+tick_kapacitor scaled to 2
+tick_influxdb scaled to 2
+tick_chronograf scaled to 2
+overall progress: 2 out of 2 tasks 
+1/2: running   [==================================================>] 
+2/2: running   [==================================================>] 
+verify: Service converged 
+overall progress: 2 out of 2 tasks 
+1/2: running   [==================================================>] 
+2/2: running   [==================================================>] 
+verify: Service converged 
+overall progress: 2 out of 2 tasks 
+1/2: running   [==================================================>] 
+2/2: running   [==================================================>] 
+verify: Service converged 
+docker service ls
+ID                  NAME                  MODE                REPLICAS            IMAGE                        PORTS
+r56tvhvahdqv        portainer_agent       global              5/5                 portainer/agent:latest       
+nf0u42mf87sw        portainer_portainer   replicated          1/1                 portainer/portainer:latest   *:9000->9000/tcp
+hvt62c044kp9        tick_chronograf       replicated          2/2                 chronograf:latest            *:8888->8888/tcp
+a5sbo2wt09zo        tick_influxdb         replicated          2/2                 influxdb:latest              *:8086->8086/tcp
+objfdomzbjly        tick_kapacitor        replicated          2/2                 kapacitor:latest             *:9092->9092/tcp
+cw9gzbaql6zh        tick_telegraf         global              5/5                 telegraf:1.9.5-alpine        
+```
+![Dashboard](./assets/images/Screenshot-dashboard.png)
+
+# Clean up
+```
+docker stack rm tick
+Removing service tick_chronograf
+Removing service tick_influxdb
+Removing service tick_kapacitor
+Removing service tick_telegraf
+Removing config tick_telegraf-config
+Removing config tick_influx-config
+Removing config tick_kapacitor-config
+Removing network tick_tick-net
+docker stack rm portainer
+Removing service portainer_agent
+Removing service portainer_portainer
+Removing network portainer_agent_network
+docker service ls
+ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
+docker image prune
+WARNING! This will remove all dangling images.
+Are you sure you want to continue? [y/N] y
+Deleted Images:
+untagged: chronograf@sha256:dc98962df469a2535d3e13abca5de27bccdd57395e993b2c835cef08a4aa228c
+deleted: sha256:a028b8a9b41f29c5baee7a090c9e60ab5abf67d9c180877c01a3b6408dd5df9d
+deleted: sha256:f5b2618b4154726ef1ea3c1d0d4e979b96d7f554261b8120a08ae49fa1f42428
+deleted: sha256:e2f8eab41b5456a3f2cc048e341d97578759d7420909a0b9b5b8de9f2a7e358c
+deleted: sha256:ba59fc255c291527718a0c5b9e134c5d139a356befcfa5419d4f83df73b8f4ae
+deleted: sha256:7cbae0395f7580abbe46c101f422ad08b6bad779781e1da350713c7a4e913181
+deleted: sha256:4a61bdac33c7797e741b8006b6529c615956e2d30decdb503ce2f515e07702f2
+deleted: sha256:cf5b3c6798f77b1f78bf4e297b27cfa5b6caa982f04caeb5de7d13c255fd7a1e
+untagged: portainer/portainer@sha256:cc226d8a06b6d5e24b44a4f10d0d1fd701741e84a852adc6d40bef9424a000ec
+deleted: sha256:da27590081471f174bc3f8c5f74b639c60574bb97331f90170af3b8ef3545ff5
+deleted: sha256:9bb9e29f65526f7567e535cd0ce62968b2f91693fe78075832ef0b1588aa77e1
+untagged: telegraf@sha256:5d9d2a27e809524e789c3dad831291419032ca37b9dc79ecd38a8c82540aa9a2
+deleted: sha256:51fcf90eaa8214f4c17ce34a1fd1651f071fa1215315d96bbb89f529b1602592
+deleted: sha256:876611a07de5086dfc7cc09f8861a6b81b0a8f07a1bfd1cf2d4a5c4cc5a479b6
+deleted: sha256:84898ab99ec6448c8a20f540630eabbabd3ec8f7a97406c1411c563e570d45ee
+deleted: sha256:3ab05b2cca7d7972d5de01876fb1cd5b2580364de32e7b2dcac4195d14211b2f
+deleted: sha256:dc506a2b14298d467af8e56931752b1f8ce4288fb03edf5eda1830225b197473
+untagged: kapacitor@sha256:d0fbdba150bec75d0680c401caa45c31fce035e94ca56af898b987fc624e23c8
+deleted: sha256:9e61daa464a852ad08b498f760134005023eba2c83bc210f206298fd536241f0
+deleted: sha256:ab44c819ec924646e567d749397eb148056aabfef183d78c6dddde342477528f
+deleted: sha256:bd38986f3aa2687ca805d557f3abdff33f0d169dcf8e65da15d96c433ff5f067
+deleted: sha256:7b74841b377cb8f8e3d27d6fc8ae6c71590c6e38577b59b7fd4b2921f8162aec
+deleted: sha256:0eebf8ea339e48223aabbb7c766415ccc39a6795e919a867f528a38d52d92efd
+deleted: sha256:499342253bdd2a8eef31673f14afb40d4182a9257e38c1904018917870897adf
+untagged: influxdb@sha256:af07db2e2040b27d4ae4c57b51729503802d22c1632893fe63ea054afe632ecc
+deleted: sha256:8a4e8eda54c156f14441c8bcc1ad351b772d41955c0c622d9ab63e1b31cec4e1
+deleted: sha256:7de3b82bf3bc37e4371ec71eb35208de203177d3307ffbb8ffcad78c82c0595e
+deleted: sha256:36d910b5829c6385fa96cd4b119aeb3c372a8a795723a036c3748206fe2b0d07
+deleted: sha256:fbaaad4e3a9bdf1bad1e1bcb8151b2964343bac496b98e749673e5373e76fabc
+deleted: sha256:a351899a6797663591b688027b6e3c6f5421affd2485e9a16ae07ade590d47e4
+deleted: sha256:4f60416588df4fc9cd1d09ff543f617695090dc9e564dc9aa54b95390ebdb18a
+deleted: sha256:5707f840eb6421a463261e9f62c9fcc691facd718993a666d5c86751ebb57cc3
+deleted: sha256:706c0c43e07bd77aba42160b0d0158297caec76c4da6566d856f28b1754f2265
+deleted: sha256:0db06dff9d9aeb9bed4edde7bd772ad0f3aea497c129d48ed587664d098c6c41
+untagged: telegraf@sha256:4239108fd464cdbaf9661f459577a1145f90e731edc5b7c484a87845a083caab
+deleted: sha256:48f7cc417d4d8a216ad51b4c1e1a12c39a5ec428d0c9449d08728a7ff5a61ec1
+deleted: sha256:deffd0fdde539fcbfa32362a9078bcb6df5e30e03218db91d9c0ac8cec804e92
+deleted: sha256:7d437fbf07644e935dc12cf6e3c9c17523ddf2178ea1117d170cf510603260d8
+deleted: sha256:1880415e8d3a8c4ac77fcb60ba421c016f1f352013707c2956985b7e56902189
+deleted: sha256:7b4b4021d6087c522a0340fdce481a6a94925cf35f6123f2f5ee47378dc9512b
+untagged: portainer/agent@sha256:d2f04b6c5a599072ddbff519bbe3e313a1d1af13725f72bebbefc6f871282ec7
+deleted: sha256:c9eca8ad8de95b4534284ae200a784db7050cfc691992118064794aca250a5ec
+deleted: sha256:9ba448a4d4b7db173b48e73066b105b2c3d92d9159a056f8fb91e68d34d47e00
+deleted: sha256:304e192db0708c8be3ce90bf9972705a9559e8bba92bb67c89f0c9ea5311d314
+deleted: sha256:dd4969f97241b9aefe2a70f560ce399ee9fa0354301c9aef841082ad52161ec5
+
+Total reclaimed space: 794MB
+```
+Docker image prune will not remove your working images just the ones taking up space.
