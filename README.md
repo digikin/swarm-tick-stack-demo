@@ -106,7 +106,7 @@ Creating service tick_influxdb
 Creating service tick_chronograf
 Creating service tick_kapacitor
 ```
-I did learn something new during this process about how docker holds on to [config files](https://docs.docker.com/engine/reference/commandline/config/).  
+I did learn something new during this process with how docker holds on to [config files](https://docs.docker.com/engine/reference/commandline/config/).  
 To view your current configs stored use the command `docker config ls`
 If you decide to make a change to your .conf files you will have to remove the old config file from dockers memory.
 Monitor during the build by running the command `docker service ls` a few times to watch the containers get built.
