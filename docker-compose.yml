@@ -2,7 +2,7 @@ version: "3.3"
 
 services:
   telegraf:
-    image: telegraf
+    image: telegraf:1.9.5-alpine
     networks:
       - tick-net
     volumes:
