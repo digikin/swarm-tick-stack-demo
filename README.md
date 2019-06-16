@@ -65,7 +65,7 @@ ID                  NAME                                        IMAGE           
 20qmlfbfzl33        portainer_agent.qgngrj1wdxru4xdlpj4zsvwmx   portainer/agent:latest   swarm1              Running             Running 2 hours ago                       
 ```
 ## Quorum
-To make this cluster slightly more fault [tolerant](https://docs.docker.com/engine/swarm/admin_guide/) lets add another manager and another worker to the cluster. To achieve quorum its best to have an odd number of managers.
+To make this cluster more fault [tolerant](https://docs.docker.com/engine/swarm/admin_guide/) lets add two more managers to the cluster. To achieve quorum its best to have an odd number of managers.
 You can bring up your original join token with:
 If you run `docker info` with an even number of managers you will get a warning.
 ```s
@@ -78,6 +78,8 @@ WARNING: Running Swarm in a two-manager configuration. This configuration provid
 $ docker swarm join-token manager
 // or use the same command for a worker token
 $ docker swarm join-token worker
+// or you can add more workers and promot them to manager with
+$ docker node promote <node>
 ```
 ```s
 $ docker node ls
@@ -86,7 +88,7 @@ ID                            HOSTNAME            STATUS              AVAILABILI
 x4t00cdi7lbepnllvp88lplyj     swarm               Ready               Active                                  18.09.6
 qgngrj1wdxru4xdlpj4zsvwmx     swarm1              Ready               Active                                  18.09.6
 m7tm3y98ytoyt0llq67qtvwuo     swarm2              Ready               Active              Reachable           18.09.6
-if3cady0iv0mxdwk1b7vtqvxz     swarm3              Ready               Active                                  18.09.6
+if3cady0iv0mxdwk1b7vtqvxz     swarm3              Ready               Active              Reachable              18.09.6
 ```
 ![Portainer Swarm Fault tolerance](./assets/images/portainerui.png)
 
