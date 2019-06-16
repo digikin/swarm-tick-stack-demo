@@ -90,6 +90,7 @@ qgngrj1wdxru4xdlpj4zsvwmx     swarm1              Ready               Active    
 m7tm3y98ytoyt0llq67qtvwuo     swarm2              Ready               Active              Reachable           18.09.6
 if3cady0iv0mxdwk1b7vtqvxz     swarm3              Ready               Active              Reachable              18.09.6
 ```
+This is before I promoted another worker to manager.
 ![Portainer Swarm Fault tolerance](./assets/images/portainerui.png)
 
 ## Tick Stack
