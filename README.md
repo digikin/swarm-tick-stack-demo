@@ -78,7 +78,7 @@ WARNING: Running Swarm in a two-manager configuration. This configuration provid
 $ docker swarm join-token manager
 // or use the same command for a worker token
 $ docker swarm join-token worker
-// or you can add more workers and promot them to manager with
+// or you can add more workers and promote them to manager with
 $ docker node promote <node>
 ```
 ```s
