@@ -23,8 +23,7 @@ $ su -
 # systemctl restart docker
 # su - <user>
 $ docker info  <you should get all the docker information back without a permission error>
-// If you get to this point without issues you can cheat by cloning this machine before
-// joining it to the swarm
+
 //Issue docker swarm join with your generated token
 
 $docker swarm join --token XXXXXX-X-XXXXXXXXXXXXXXXXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXXXX 192.168.1.8:2377
