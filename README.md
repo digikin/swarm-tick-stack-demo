@@ -1,6 +1,6 @@
 # Swarm-tick-stack-demo
-docker swarm tick stack deploy demo.
-Please help out and create a pull request to make this better or submit an issue.
+docker swarm tick stack deploy demo.<br />
+Please help out and create a pull request to make this better or submit an issue.<br />
 Clone the repo https://github.com/digikin/swarm-tick-stack-demo.git.
 
 ## Start the cluster by declairing the masters IP address
