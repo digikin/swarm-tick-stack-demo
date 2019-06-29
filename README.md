@@ -1,5 +1,6 @@
 # Swarm-tick-stack-demo
-docker swarm tick stack deploy demo.
+docker swarm tick stack deploy demo.<br />
+Please help out and create a pull request to make this better or submit an issue.<br />
 Clone the repo https://github.com/digikin/swarm-tick-stack-demo.git.
 
 ## Start the cluster by declairing the masters IP address
@@ -107,8 +108,8 @@ Creating service tick_chronograf
 Creating service tick_kapacitor
 ```
 I did learn something new during this process with how docker holds on to [config files](https://docs.docker.com/engine/reference/commandline/config/).  
-To view your current configs stored use the command `docker config ls`
-If you decide to make a change to your .conf files you will have to remove the old config file from dockers memory.<br />
+To view your current configs stored use the command `docker config ls`.<br />
+If you decide to make a change to your .conf files you will have to remove the old config file from dockers memory. `docker config rm xxxxxxxxxxxxxxxxx`<br />
 Monitor during the build by running the command `docker service ls` a few times to watch the containers get built.
 ```s
 $ docker service ls
@@ -143,7 +144,7 @@ tick                4                   Swarm
 
 Docker will help us out with DNS so change the Connection URL to `http://influxdb:8086`
 
-I did have an issue with new new version of InfluxDB where I had to use my master nodes IP to connect to influx through chronograf's dashboard.
+I did have an issue with a newer version of InfluxDB where I had to use my master nodes IP to connect to influx through chronograf's dashboard.
 
 ![Chronograph UI](./assets/images/Screenshot-chronograf.png)
 ![Chronograph UI](./assets/images/Screenshot-chronograf2.png)
