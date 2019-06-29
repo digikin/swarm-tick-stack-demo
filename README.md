@@ -193,6 +193,9 @@ cw9gzbaql6zh        tick_telegraf         global              5/5               
 You can see the graphs on the dashboard shoot up during the build process.
 ![Dashboard](./assets/images/Screenshot-dashboard.png)
 
+## Configuring Alerts for Kapacitor
+![Chronograph UI](./assets/images/kapacitor.png)
+
 # Clean up
 ```s
 $ docker stack rm tick
