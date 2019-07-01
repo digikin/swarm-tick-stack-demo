@@ -196,6 +196,25 @@ You can see the graphs on the dashboard shoot up during the build process.
 
 ## Configuring Alerts for Kapacitor
 ![Chronograph UI](./assets/images/kapacitor.png)
+To configure alerts for slack you will have to bring the service down. `docker stack rm tick`.
+In the telegraf.conf file you will need to configure the slack alert handler. 
+https://slack.com/services/new/incoming-webhook
+Add an incoming web hook for your channel.  
+```
+[[slack]]
+  enabled = true
+  default = true
+  workspace = "example.slack.com"
+  url = "https://hooks.slack.com/FSDR#$#/%#$U%$#3643/364jkr"
+  channel = "#alerts"
+  username = "kapacitor"
+  global = false
+```
+For testing puropose I configured somthing I know will alert.  Chronograf brings the query into view with a faded alert line so you can see the threshold on where it will trigget the webhook. You can see in the picuture I set it for cpu_usage_idle > 98% and the faded green bar across the graph to visualise if an alert will be hit. 
+![Configure Alert UI](./assets/images/configure-alert.png)
+
+Select the Alert Handlers drop down to slack.  
+![Slack Alert UI](./assets/images/thumbs-up.png)
 
 # Clean up
 ```s

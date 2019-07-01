@@ -18,7 +18,7 @@ services:
       - influxdb
 
   influxdb:
-    image: influxdb
+    image: influxdb:1.7.7
     networks:
       - tick-net
     ports:
@@ -34,7 +34,7 @@ services:
           - node.role == manager
 
   chronograf:
-    image: chronograf
+    image: chronograf:1.7.12
     networks:
       - tick-net
     ports:
@@ -50,7 +50,7 @@ services:
       - influxdb
 
   kapacitor:
-    image: kapacitor
+    image: kapacitor:1.5.3
     networks:
       - tick-net
     configs:
