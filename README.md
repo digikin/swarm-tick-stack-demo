@@ -196,7 +196,7 @@ You can see the graphs on the dashboard shoot up during the build process.
 
 ## Configuring Alerts for Kapacitor
 ![Chronograph UI](./assets/images/kapacitor.png)
-To configure alerts for slack you will have to bring the service down. `docker stack rm tick`.
+To csetup alerts for slack you will have to bring the service down. `docker stack rm tick`.
 In the telegraf.conf file you will need to configure the slack alert handler. 
 https://slack.com/services/new/incoming-webhook
 Add an incoming web hook for your channel.  
