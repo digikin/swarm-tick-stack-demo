@@ -210,7 +210,7 @@ Add an incoming web hook for your channel.
   username = "kapacitor"
   global = false
 ```
-For testing puropose I configured somthing I know will alert.  Chronograf brings the query into view with a faded alert line so you can see the threshold on where it will trigget the webhook. You can see in the picuture I set it for cpu_usage_idle > 98% and the faded green bar across the graph to visualise if an alert will be hit. 
+For testing puropose I configured somthing I know will alert.  Chronograf brings the query into view with a faded alert line so you can see the threshold on where it will trigger the webhook. You can see in the picuture I set it for cpu_usage_idle > 98% and the faded green bar across the graph to visualise if an alert will be hit. 
 ![Configure Alert UI](./assets/images/configure-alert.png)
 ![Alert Handlers UI](./assets/images/alert-handlers.png)
 
